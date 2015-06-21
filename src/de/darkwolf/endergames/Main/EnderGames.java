@@ -32,7 +32,7 @@ public class EnderGames extends JavaPlugin {
 	public void onEnable() {
 		FileManager.setupConfigs();
 		MySQL.connect();
-		this.getServer().getConsoleSender().sendMessage(prefix + "Plugin Coded by DarkWolf");
+		this.getServer().getConsoleSender().sendMessage(prefix + "Plugin Coded by DarkWolf!");
 		this.getServer().getConsoleSender().sendMessage(prefix + "Config Datei: " + (FileManager.getConfigFile().exists() ? "§2erfolgreich geladen!" : "§4nicht gefunden!"));
 		this.getServer().getConsoleSender().sendMessage(prefix + "MySQL Datei: " + (FileManager.getMySQLFile().exists() ? "§2erfolgreich geladen!" : "§4nicht gefunden!"));
 		this.getServer().getConsoleSender().sendMessage(prefix + " MySQL Verbindungsaufgebau: " + (MySQL.con == null ? "§4ist fehlgeschlagen!" : "§2war erfolgreich!"));
