@@ -1,0 +1,7 @@
+main: de.darkwolf.endergames.Main.EnderGames
+name: EnderGames
+version: 1.0
+author: DarkWolf
+
+commands:
+  stats:
