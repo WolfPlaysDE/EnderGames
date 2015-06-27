@@ -5,8 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.darkwolf.endergames.Main.EnderGames;
-
 public class HelpCommand implements CommandExecutor {
 
 	@Override
@@ -19,21 +17,16 @@ public class HelpCommand implements CommandExecutor {
 		
 		Player p = (Player) sender;
 		
-		if(args.length == 0) {
-			p.sendMessage("§8[]=====[ §5EnderGames §8┃ §6Hilfe §8]=====[]");
-			p.sendMessage("§5Hilfe: §c/help");
-			p.sendMessage("§5Stats: §c/stats <Name>");
-			p.sendMessage("§8[]=====[ §5EnderGames §8┃ §6Hilfe §8]=====[]");
-		} else if(args.length >= 1) {
-			p.sendMessage("§8[]=====[ §5EnderGames §8┃ §6Hilfe §8]=====[]");
-			p.sendMessage("§5Hilfe: §c/help");
-			p.sendMessage("§5Stats: §c/stats <Name>");
-			p.sendMessage("§8[]=====[ §5EnderGames §8┃ §6Hilfe §8]=====[]");
-		} else {
-			p.sendMessage(EnderGames.getInstance().prefix + EnderGames.getInstance().unknow);
-		}
+		this.sendHelp(p);
 		
 		return true;
+	}
+	
+	private void sendHelp(CommandSender sender) {
+		sender.sendMessage("§8[]=====[ §5EnderGames §8┃ §6Hilfe §8]=====[]");
+		sender.sendMessage("§5Hilfe: §c/help");
+		sender.sendMessage("§5Stats: §c/stats <Name>");
+		sender.sendMessage("§8[]=====[ §5EnderGames §8┃ §6Hilfe §8]=====[]");
 	}
 
 }

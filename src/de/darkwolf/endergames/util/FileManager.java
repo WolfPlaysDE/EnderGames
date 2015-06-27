@@ -15,6 +15,7 @@ public class FileManager {
 	public static File getConfigFile() {
 		return new File(EnderGames.getInstance().getDataFolder(), "config.yml");
 	}
+	
 	public static FileConfiguration getConfigFileConfiguration() {
 		return YamlConfiguration.loadConfiguration(getConfigFile());
 	}
@@ -23,17 +24,19 @@ public class FileManager {
 	public static File getMySQLFile() {
 		return new File(EnderGames.getInstance().getDataFolder(), "mysql.yml");
 	}
+	
 	public static FileConfiguration getMySQLFileConfiguration() {
 		return YamlConfiguration.loadConfiguration(getMySQLFile());
 	}
+	
 	
 	// Config File setup
 	public static void setDefaultConfig() {
 		FileConfiguration cfg = getConfigFileConfiguration();
 		cfg.options().copyDefaults(true);
 		cfg.addDefault("prefix", "&8[&5EnderGames&8]");
-		cfg.addDefault("Unbekannter_Befehl", "§cUnbekannter Befehl!");
-		cfg.addDefault("Keine_Permissions", "§cDu hast keine Berechtigung!");
+		cfg.addDefault("Unbekannter_Befehl", "Â§cUnbekannter Befehl!");
+		cfg.addDefault("Keine_Permissions", "Â§cDu hast keine Berechtigung!");
 		try {
 			cfg.save(getConfigFile());
 		} catch (IOException e) {
@@ -42,9 +45,9 @@ public class FileManager {
 	}
 	public static void readConfig() {
 		FileConfiguration cfg = getConfigFileConfiguration();
-		EnderGames.getInstance().prefix = ChatColor.translateAlternateColorCodes('&', cfg.getString("prefix") + "§r ");
-		EnderGames.getInstance().unknow = ChatColor.translateAlternateColorCodes('&', cfg.getString("Unbekannter_Befehl") + "§r ");
-		EnderGames.getInstance().noperm = ChatColor.translateAlternateColorCodes('&', cfg.getString("Keine_Permissions") + "§r ");
+		EnderGames.getInstance().prefix = ChatColor.translateAlternateColorCodes('&', cfg.getString("prefix") + "Â§r ");
+		EnderGames.getInstance().unknow = ChatColor.translateAlternateColorCodes('&', cfg.getString("Unbekannter_Befehl") + "Â§r ");
+		EnderGames.getInstance().noperm = ChatColor.translateAlternateColorCodes('&', cfg.getString("Keine_Permissions") + "Â§r ");
 	}
 	
 	//MySQL File setup
