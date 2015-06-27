@@ -1,14 +1,12 @@
 package de.darkwolf.endergames.util;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.bukkit.entity.Player;
-
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class MySQLEnderGamesManager {
 	
@@ -25,7 +23,7 @@ public class MySQLEnderGamesManager {
 	 */
 	public static boolean isPlayerInDatabase(Player p) {
 		boolean returnStatement = false;
-		String qry = "SELECT * FROM " + MySQL.TABEL_ENDERGAMES + " WHERE uuid = ?";
+		String qry = "SELECT * FROM " + MySQL.TABLE_ENDERGAMES + " WHERE uuid = ?";
 		try {
 			PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 			pstmt.setString(1, p.getUniqueId().toString());
@@ -47,7 +45,7 @@ public class MySQLEnderGamesManager {
 		executor.execute(new Runnable() {
 			@Override
 			public void run() {
-				String qry = "INSERT INTO " + MySQL.TABEL_ENDERGAMES + " (uuid, playername, kits, kills, deaths, points, wins, played) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				String qry = "INSERT INTO " + MySQL.TABLE_ENDERGAMES + " (uuid, playername, kits, kills, deaths, points, wins, played) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				try {
 					PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 					pstmt.setString(1, p.getUniqueId().toString());
@@ -75,7 +73,7 @@ public class MySQLEnderGamesManager {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					String qry = "UPDATE " + MySQL.TABEL_ENDERGAMES + " SET playername = ? WHERE uuid = ?";
+					String qry = "UPDATE " + MySQL.TABLE_ENDERGAMES + " SET playername = ? WHERE uuid = ?";
 					try {
 						PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 						pstmt.setString(1, playername);
@@ -96,7 +94,7 @@ public class MySQLEnderGamesManager {
 	 */
 	public static Integer getPlayerKills(Player p) {
 		int returnsatement = 0;
-		String qry = "SELECT * FROM " + MySQL.TABEL_ENDERGAMES + " WHERE uuid = ?";
+		String qry = "SELECT * FROM " + MySQL.TABLE_ENDERGAMES + " WHERE uuid = ?";
 		if(isPlayerInDatabase(p)) {
 			try {
 				PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
@@ -121,7 +119,7 @@ public class MySQLEnderGamesManager {
 	 */
 	public static Integer getPlayerDeaths(Player p) {
 		int returnsatement = 0;
-		String qry = "SELECT * FROM " + MySQL.TABEL_ENDERGAMES + " WHERE uuid = ?";
+		String qry = "SELECT * FROM " + MySQL.TABLE_ENDERGAMES + " WHERE uuid = ?";
 		if(isPlayerInDatabase(p)) {
 			try {
 				PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
@@ -146,7 +144,7 @@ public class MySQLEnderGamesManager {
 	 */
 	public static Integer getPlayerPoints(Player p) {
 		int returnsatement = 0;
-		String qry = "SELECT * FROM " + MySQL.TABEL_ENDERGAMES + " WHERE uuid = ?";
+		String qry = "SELECT * FROM " + MySQL.TABLE_ENDERGAMES + " WHERE uuid = ?";
 		if(isPlayerInDatabase(p)) {
 			try {
 				PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
@@ -171,7 +169,7 @@ public class MySQLEnderGamesManager {
 	 */
 	public static Integer getPlayerWins(Player p) {
 		int returnsatement = 0;
-		String qry = "SELECT * FROM " + MySQL.TABEL_ENDERGAMES + " WHERE uuid = ?";
+		String qry = "SELECT * FROM " + MySQL.TABLE_ENDERGAMES + " WHERE uuid = ?";
 		if(isPlayerInDatabase(p)) {
 			try {
 				PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
@@ -196,7 +194,7 @@ public class MySQLEnderGamesManager {
 	 */
 	public static Integer getPlayerPlayedGames(Player p) {
 		int returnsatement = 0;
-		String qry = "SELECT * FROM " + MySQL.TABEL_ENDERGAMES + " WHERE uuid = ?";
+		String qry = "SELECT * FROM " + MySQL.TABLE_ENDERGAMES + " WHERE uuid = ?";
 		if(isPlayerInDatabase(p)) {
 			try {
 				PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
@@ -224,7 +222,7 @@ public class MySQLEnderGamesManager {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					String qry = "UPDATE " + MySQL.TABEL_ENDERGAMES + " SET kills = ? WHERE uuid = ?";
+					String qry = "UPDATE " + MySQL.TABLE_ENDERGAMES + " SET kills = ? WHERE uuid = ?";
 					try {
 						PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 						pstmt.setInt(1, kills);
@@ -248,7 +246,7 @@ public class MySQLEnderGamesManager {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					String qry = "UPDATE " + MySQL.TABEL_ENDERGAMES + " SET deaths = ? WHERE uuid = ?";
+					String qry = "UPDATE " + MySQL.TABLE_ENDERGAMES + " SET deaths = ? WHERE uuid = ?";
 					try {
 						PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 						pstmt.setInt(1, deaths);
@@ -272,7 +270,7 @@ public class MySQLEnderGamesManager {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					String qry = "UPDATE " + MySQL.TABEL_ENDERGAMES + " SET points = ? WHERE uuid = ?";
+					String qry = "UPDATE " + MySQL.TABLE_ENDERGAMES + " SET points = ? WHERE uuid = ?";
 					try {
 						PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 						pstmt.setInt(1, points);
@@ -296,7 +294,7 @@ public class MySQLEnderGamesManager {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					String qry = "UPDATE " + MySQL.TABEL_ENDERGAMES + " SET points = ? WHERE uuid = ?";
+					String qry = "UPDATE " + MySQL.TABLE_ENDERGAMES + " SET points = ? WHERE uuid = ?";
 					try {
 						PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 						pstmt.setInt(1, points);
@@ -320,7 +318,7 @@ public class MySQLEnderGamesManager {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					String qry = "UPDATE " + MySQL.TABEL_ENDERGAMES + " SET wins = ? WHERE uuid = ?";
+					String qry = "UPDATE " + MySQL.TABLE_ENDERGAMES + " SET wins = ? WHERE uuid = ?";
 					try {
 						PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 						pstmt.setInt(1, wins);
@@ -344,7 +342,7 @@ public class MySQLEnderGamesManager {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					String qry = "UPDATE " + MySQL.TABEL_ENDERGAMES + " SET played = ? WHERE uuid = ?";
+					String qry = "UPDATE " + MySQL.TABLE_ENDERGAMES + " SET played = ? WHERE uuid = ?";
 					try {
 						PreparedStatement pstmt = MySQL.con.prepareStatement(qry);
 						pstmt.setInt(1, played);

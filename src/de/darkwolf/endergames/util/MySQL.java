@@ -15,7 +15,7 @@ public class MySQL {
 	public static String port;
 	public static String database;
 	
-	public static String TABEL_ENDERGAMES = "EnderGames";
+	public static String TABLE_ENDERGAMES = "EnderGames";
 	
 	public static Connection con;
 	
@@ -67,7 +67,7 @@ public class MySQL {
 				public void run() {
 					try {
 						{
-							String qry = "CREATE TABLE IF NOT EXISTS "+ MySQL.TABEL_ENDERGAMES +" (uuid TEXT, playername TEXT, kits TEXT, kills INT, deaths INT, points INT, wins INT, played INT)";
+							String qry = "CREATE TABLE IF NOT EXISTS "+ MySQL.TABLE_ENDERGAMES +" (uuid TEXT, playername TEXT, kits TEXT, kills INT, deaths INT, points INT, wins INT, played INT)";
 							PreparedStatement stmt;
 							stmt = con.prepareStatement(qry);
 							stmt.executeUpdate();

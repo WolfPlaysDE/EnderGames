@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.darkwolf.endergames.Commands.HelpCommand;
 import de.darkwolf.endergames.Commands.StatsCommand;
 import de.darkwolf.endergames.Listener.ChestListener;
+import de.darkwolf.endergames.Listener.ListenerBundle;
 import de.darkwolf.endergames.Listener.Items.Switcher;
 import de.darkwolf.endergames.util.FileManager;
 import de.darkwolf.endergames.util.MySQL;
@@ -32,15 +33,18 @@ public class EnderGames extends JavaPlugin {
 	public void onEnable() {
 		FileManager.setupConfigs();
 		MySQL.connect();
+		
 		this.getServer().getConsoleSender().sendMessage(prefix + "Plugin Coded by DarkWolf!");
-		this.getServer().getConsoleSender().sendMessage(prefix + "Config Datei: " + (FileManager.getConfigFile().exists() ? "ง2erfolgreich geladen!" : "ง4nicht gefunden!"));
-		this.getServer().getConsoleSender().sendMessage(prefix + "MySQL Datei: " + (FileManager.getMySQLFile().exists() ? "ง2erfolgreich geladen!" : "ง4nicht gefunden!"));
-		this.getServer().getConsoleSender().sendMessage(prefix + " MySQL Verbindungsaufgebau: " + (MySQL.con == null ? "ง4ist fehlgeschlagen!" : "ง2war erfolgreich!"));
+		this.getServer().getConsoleSender().sendMessage(prefix + "Config Datei: " + (FileManager.getConfigFile().exists() ? "ยง2erfolgreich geladen!" : "ยง4nicht gefunden!"));
+		this.getServer().getConsoleSender().sendMessage(prefix + "MySQL Datei: " + (FileManager.getMySQLFile().exists() ? "ยง2erfolgreich geladen!" : "ยง4nicht gefunden!"));
+		this.getServer().getConsoleSender().sendMessage(prefix + " MySQL Verbindungsaufgebau: " + (MySQL.con == null ? "ยง4ist fehlgeschlagen!" : "ยง2war erfolgreich!"));
+		
 		if (MySQL.con == null) {
-	      Plugin plugin = getServer().getPluginManager().getPlugin("EnderGames");
-	      getServer().getPluginManager().disablePlugin(plugin);
-	      this.getServer().getConsoleSender().sendMessage(prefix + " ง4งlDAS PLUGIN WURDE DEAKTIVIRT, WEIL DIE MYSQL VERBINDUNG FEHLGESCHLAGEN IST!");
+			Plugin plugin = getServer().getPluginManager().getPlugin("EnderGames");
+			getServer().getPluginManager().disablePlugin(plugin);
+			this.getServer().getConsoleSender().sendMessage(prefix + " ยง4ยงlDAS PLUGIN WURDE DEAKTIVIRT, WEIL DIE MYSQL VERBINDUNG FEHLGESCHLAGEN IST!");
 	    }
+		
 		registerListener();
 		registerCommands();
 	}
@@ -51,11 +55,11 @@ public class EnderGames extends JavaPlugin {
 	}
 	
 	private void registerListener() {
-		//Listener
-		getServer().getPluginManager().registerEvents(new ChestListener(this), this);
+		ListenerBundle main = new ListenerBundle();
+		main.add(new ChestListener(this));
+		main.add(new Switcher());
 		
-		//Listener Items
-		getServer().getPluginManager().registerEvents(new Switcher(), this);
+		ListenerBundle.register(this, "main", main);
 	}
 	
 	private void registerCommands() {

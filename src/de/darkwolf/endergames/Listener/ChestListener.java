@@ -20,42 +20,42 @@ public class ChestListener implements Listener{
 
 	private EnderGames plugin;
 	private List<ItemStack> items;
+	private Random rnd;
 
 	public ChestListener(EnderGames EnderGames) {
 		this.plugin = EnderGames;
+		this.rnd = new Random();
 		this.items = new ArrayList<ItemStack>();
-		setChestItems();
+		this.setChestItems();
 	}
 	
 	@EventHandler
 	public void onChestInteract(PlayerInteractEvent e) {
 		
 		Player p = e.getPlayer();
-		if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if(e.getClickedBlock().getType() == Material.ENDER_CHEST) {
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK
+				&& e.getClickedBlock().getType() == Material.ENDER_CHEST) {
 				
-				if(plugin.chests.containsKey(e.getClickedBlock().getLocation())) {
-					p.openInventory(plugin.chests.get(e.getClickedBlock().getLocation()));
-					return;
-				}
-				
-				Inventory inv = Bukkit.createInventory(null, 27, "ง8Chest");
-				
-				Random rnd = new Random();
-				
-				int itemCount = rnd.nextInt(5) + 2;
-				
-				while(itemCount > 0) {
-					itemCount--;
-					ItemStack item = items.get(rnd.nextInt(items.size()));
-					int slot = rnd.nextInt(27);
-					inv.setItem(slot, item);
-				}
-				plugin.chests.put(e.getClickedBlock().getLocation(), inv);
-				p.openInventory(inv);
-				
+			if (plugin.chests.containsKey(e.getClickedBlock().getLocation())) {
+				p.openInventory(plugin.chests.get(e.getClickedBlock().getLocation()));
 				return;
 			}
+
+			Inventory inv = Bukkit.createInventory(null, 27, "ยง8Chest");
+
+			int itemCount = rnd.nextInt(5) + 2;
+
+			while (itemCount > 0) {
+				itemCount--;
+				ItemStack item = items.get(rnd.nextInt(items.size()));
+				int slot = rnd.nextInt(27);
+				inv.setItem(slot, item);
+			}
+			
+			plugin.chests.put(e.getClickedBlock().getLocation(), inv);
+			p.openInventory(inv);
+
+			return;
 		}
 		
 	}
